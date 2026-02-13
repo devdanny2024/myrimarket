@@ -1,5 +1,3 @@
-import { Suspense } from "react";
-
 import { fetchCategories, fetchProducts } from "@/lib/api";
 import type { Product } from "@/lib/api";
 
@@ -8,7 +6,7 @@ import { Hero } from "@/components/Hero";
 import { ProductCard } from "@/components/ProductCard";
 import { TopNav } from "@/components/TopNav";
 
-export const dynamic = "force-dynamic";
+export const dynamic = "force-static";
 
 function getCurrencyFromSearchParams(searchParams?: {
   currency?: string;
