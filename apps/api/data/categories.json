@@ -1,0 +1,8 @@
+[
+  { "id": "ai", "name": "AI Subscriptions", "slug": "ai", "icon": "sparkles" },
+  { "id": "music", "name": "Music", "slug": "music", "icon": "music" },
+  { "id": "games", "name": "Games & Top-ups", "slug": "games", "icon": "gamepad" },
+  { "id": "social", "name": "Social", "slug": "social", "icon": "message-circle" },
+  { "id": "streaming", "name": "Streaming", "slug": "streaming", "icon": "tv" },
+  { "id": "giftcards", "name": "Gift Cards", "slug": "giftcards", "icon": "credit-card" }
+]

@@ -1,70 +1,69 @@
-import Image from "next/image";
-import Link from "next/link";
+import { Suspense } from "react";
 
-import { Button } from "@/components/ui/button";
+import { fetchCategories, fetchProducts } from "@/lib/api";
+import type { Product } from "@/lib/api";
+
+import { CategoryGrid } from "@/components/CategoryGrid";
+import { Hero } from "@/components/Hero";
+import { ProductCard } from "@/components/ProductCard";
+import { TopNav } from "@/components/TopNav";
 
 export const dynamic = "force-dynamic";
 
-export default async function Home() {
-  let apiStatus: string = "unknown";
+function getCurrencyFromSearchParams(searchParams?: {
+  currency?: string;
+}): "NGN" | "BTC" {
+  return searchParams?.currency === "BTC" ? "BTC" : "NGN";
+}
 
-  try {
-    const controller = new AbortController();
-    const t = setTimeout(() => controller.abort(), 800);
+export default async function Home({
+  searchParams,
+}: {
+  searchParams?: Promise<{ categoryId?: string; currency?: string }>;
+}) {
+  const sp = searchParams ? await searchParams : undefined;
+  const categories = await fetchCategories();
+  const products = await fetchProducts({ categoryId: sp?.categoryId });
+  const currency = getCurrencyFromSearchParams(sp);
 
-    const res = await fetch("http://localhost:4001/health", {
-      cache: "no-store",
-      signal: controller.signal,
-    });
-
-    clearTimeout(t);
-    apiStatus = res.ok ? "ok" : `error (${res.status})`;
-  } catch {
-    apiStatus = "unreachable";
-  }
+  const newArrivals: Product[] = products.slice(0, 8);
 
   return (
-    <main className="min-h-screen">
-      <div className="mx-auto max-w-5xl px-6 py-16">
-        <div className="flex items-center gap-4">
-          <Image
-            src="/myri-logo.svg"
-            alt="MYRI"
-            width={180}
-            height={56}
-            priority
-          />
-          <div className="text-sm text-muted-foreground">
-            API status: <span className="font-medium">{apiStatus}</span>
+    <div className="min-h-screen bg-slate-50">
+      <TopNav categories={categories} />
+
+      <main className="mx-auto max-w-6xl px-4 py-8">
+        <Hero />
+
+        <CategoryGrid categories={categories} />
+
+        <section id="new-arrivals" className="mt-14">
+          <div className="text-center">
+            <div className="text-xs text-slate-500">Hurry up to buy</div>
+            <h2 className="mt-2 text-3xl font-semibold text-slate-900">
+              New Arrivals
+            </h2>
+            <p className="mt-2 text-slate-600">
+              Digital products, instant delivery, real discounts.
+            </p>
           </div>
-        </div>
 
-        <h1 className="mt-10 text-4xl font-semibold tracking-tight">
-          Myri site (Next.js + shadcn/ui)
-        </h1>
-        <p className="mt-4 max-w-2xl text-muted-foreground">
-          Monorepo scaffold: <code className="font-mono">apps/web</code> on port
-          3000 and <code className="font-mono">apps/api</code> on port 4001.
-        </p>
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {newArrivals.map((p) => (
+              <ProductCard key={p.id} product={p} currency={currency} />
+            ))}
+          </div>
+        </section>
 
-        <div className="mt-8 flex flex-wrap gap-3">
-          <Button>
-            <Link href="/" aria-label="Refresh" className="text-inherit no-underline">
-              Refresh
-            </Link>
-          </Button>
-          <Button variant="outline">
-            <a
-              href="http://localhost:4001/health"
-              target="_blank"
-              rel="noreferrer"
-              className="text-inherit no-underline"
-            >
-              Open API /health
-            </a>
-          </Button>
-        </div>
-      </div>
-    </main>
+        <section id="about" className="mt-16 rounded-2xl border border-slate-200 bg-white p-8">
+          <h3 className="text-xl font-semibold text-slate-900">About Myri Market</h3>
+          <p className="mt-2 text-slate-600">
+            We sell digital products in Nigeria. Customers can pay with Naira or BTC.
+            Products show slashed “compare-at” pricing to highlight your discounts.
+            Admins can manage catalog and pricing from the Admin dashboard.
+          </p>
+        </section>
+      </main>
+    </div>
   );
 }
