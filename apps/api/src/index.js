@@ -7,11 +7,15 @@ const crypto = require("crypto");
 const {
   getCategories,
   getProducts,
-  saveProducts,
-  saveCategories,
-} = require("./store");
+  getProduct,
+  createProduct,
+  updateProduct,
+  deleteProduct,
+  replaceCategories,
+  createOrder,
+  updateOrder,
+} = require("./store-db");
 const { getPaystack } = require("./paystack");
-const { createOrder, updateOrder } = require("./orders");
 
 const app = express();
 
@@ -32,37 +36,35 @@ const UPLOAD_DIR = path.join(__dirname, "..", "uploads");
 app.use("/uploads", express.static(UPLOAD_DIR));
 
 // Public catalog
-app.get("/categories", (_req, res) => {
-  res.json(getCategories());
+app.get("/categories", async (_req, res) => {
+  try {
+    res.json(await getCategories());
+  } catch (e) {
+    res.status(500).json({ error: e?.message ?? "Failed" });
+  }
 });
 
-app.get("/products", (req, res) => {
-  const { categoryId, q } = req.query;
-  let items = getProducts().filter((p) => p.isActive);
-
-  if (typeof categoryId === "string" && categoryId.trim()) {
-    items = items.filter((p) => p.categoryId === categoryId);
+app.get("/products", async (req, res) => {
+  try {
+    const { categoryId, q } = req.query;
+    const items = await getProducts({
+      categoryId: typeof categoryId === "string" ? categoryId : undefined,
+      q: typeof q === "string" ? q : undefined,
+    });
+    res.json(items);
+  } catch (e) {
+    res.status(500).json({ error: e?.message ?? "Failed" });
   }
-
-  if (typeof q === "string" && q.trim()) {
-    const needle = q.toLowerCase();
-    items = items.filter(
-      (p) =>
-        (p.title ?? "").toLowerCase().includes(needle) ||
-        (p.shortDescription ?? "").toLowerCase().includes(needle)
-    );
-  }
-
-  // Sort newest first
-  items.sort((a, b) => String(b.createdAt).localeCompare(String(a.createdAt)));
-
-  res.json(items);
 });
 
-app.get("/products/:id", (req, res) => {
-  const item = getProducts().find((p) => p.id === req.params.id);
-  if (!item || !item.isActive) return res.status(404).json({ error: "Not found" });
-  res.json(item);
+app.get("/products/:id", async (req, res) => {
+  try {
+    const item = await getProduct(req.params.id);
+    if (!item) return res.status(404).json({ error: "Not found" });
+    res.json(item);
+  } catch (e) {
+    res.status(500).json({ error: e?.message ?? "Failed" });
+  }
 });
 
 function requireAdmin(req, res, next) {
@@ -101,46 +103,55 @@ app.post("/admin/upload", requireAdmin, upload.single("file"), (req, res) => {
 });
 
 // Admin: products
-app.post("/admin/products", requireAdmin, (req, res) => {
-  const products = getProducts();
-  const p = req.body;
-  if (!p?.id || !p?.title) return res.status(400).json({ error: "id and title are required" });
-  if (products.some((x) => x.id === p.id)) {
-    return res.status(409).json({ error: "Product id already exists" });
+app.post("/admin/products", requireAdmin, async (req, res) => {
+  try {
+    const p = req.body;
+    if (!p?.id || !p?.title || !p?.categoryId) {
+      return res.status(400).json({ error: "id, title, categoryId are required" });
+    }
+    const created = await createProduct(p);
+    res.json(created);
+  } catch (e) {
+    const msg = e?.message ?? "Create failed";
+    if (msg.toLowerCase().includes("unique") || msg.toLowerCase().includes("duplicate")) {
+      return res.status(409).json({ error: msg });
+    }
+    res.status(500).json({ error: msg });
   }
-  const now = new Date().toISOString();
-  const next = {
-    ...p,
-    isActive: p.isActive ?? true,
-    createdAt: p.createdAt ?? now,
-  };
-  products.push(next);
-  saveProducts(products);
-  res.json(next);
 });
 
-app.put("/admin/products/:id", requireAdmin, (req, res) => {
-  const products = getProducts();
-  const idx = products.findIndex((p) => p.id === req.params.id);
-  if (idx < 0) return res.status(404).json({ error: "Not found" });
-  products[idx] = { ...products[idx], ...req.body, id: req.params.id };
-  saveProducts(products);
-  res.json(products[idx]);
+app.put("/admin/products/:id", requireAdmin, async (req, res) => {
+  try {
+    const updated = await updateProduct(req.params.id, req.body ?? {});
+    res.json(updated);
+  } catch (e) {
+    const msg = e?.message ?? "Update failed";
+    if (msg.toLowerCase().includes("record") && msg.toLowerCase().includes("not found")) {
+      return res.status(404).json({ error: "Not found" });
+    }
+    res.status(500).json({ error: msg });
+  }
 });
 
-app.delete("/admin/products/:id", requireAdmin, (req, res) => {
-  const products = getProducts();
-  const next = products.filter((p) => p.id !== req.params.id);
-  saveProducts(next);
-  res.json({ ok: true });
+app.delete("/admin/products/:id", requireAdmin, async (req, res) => {
+  try {
+    await deleteProduct(req.params.id);
+    res.json({ ok: true });
+  } catch (e) {
+    res.status(500).json({ error: e?.message ?? "Delete failed" });
+  }
 });
 
 // Admin: categories
-app.put("/admin/categories", requireAdmin, (req, res) => {
-  const categories = Array.isArray(req.body) ? req.body : null;
-  if (!categories) return res.status(400).json({ error: "Expected array" });
-  saveCategories(categories);
-  res.json({ ok: true, count: categories.length });
+app.put("/admin/categories", requireAdmin, async (req, res) => {
+  try {
+    const categories = Array.isArray(req.body) ? req.body : null;
+    if (!categories) return res.status(400).json({ error: "Expected array" });
+    const result = await replaceCategories(categories);
+    res.json(result);
+  } catch (e) {
+    res.status(500).json({ error: e?.message ?? "Update failed" });
+  }
 });
 
 // Paystack: initialize NGN payment
@@ -159,7 +170,7 @@ app.post("/paystack/initialize", async (req, res) => {
     const amountKobo = Math.round(Number(amountNgn) * 100);
     const orderId = crypto.randomBytes(12).toString("hex");
 
-    createOrder({
+    await createOrder({
       id: orderId,
       productId,
       email,
@@ -179,7 +190,7 @@ app.post("/paystack/initialize", async (req, res) => {
     });
 
     // init.data.authorization_url
-    updateOrder(orderId, {
+    await updateOrder(orderId, {
       status: "pending",
       paystackRef: init?.data?.reference,
     });
@@ -206,7 +217,7 @@ app.get("/paystack/verify/:reference", async (req, res) => {
 
     const orderId = meta.orderId;
     if (orderId) {
-      updateOrder(orderId, {
+      await updateOrder(orderId, {
         status: status === "success" ? "paid" : status,
         paystackRef: reference,
       });

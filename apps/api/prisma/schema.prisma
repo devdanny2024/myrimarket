@@ -1,0 +1,50 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id    String  @id
+  name  String
+  slug  String  @unique
+  icon  String?
+
+  products Product[]
+}
+
+model Product {
+  id               String   @id
+  title            String
+  categoryId       String
+  shortDescription String?
+  image            String?
+  priceNgn         Int
+  compareAtNgn     Int?
+  btcEnabled       Boolean  @default(false)
+  priceBtc         Float?
+  compareAtBtc     Float?
+  badge            String?
+  isActive         Boolean  @default(true)
+  createdAt        DateTime @default(now())
+
+  category Category @relation(fields: [categoryId], references: [id])
+  orders   Order[]
+}
+
+model Order {
+  id         String   @id
+  productId  String
+  email      String
+  currency   String
+  amount     Float
+  status     String
+  paystackRef String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  product Product @relation(fields: [productId], references: [id])
+}
