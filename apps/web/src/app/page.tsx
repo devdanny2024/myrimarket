@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 
@@ -48,9 +49,9 @@ export default async function Home() {
 
         <div className="mt-8 flex flex-wrap gap-3">
           <Button>
-            <a href="/" aria-label="Refresh" className="text-inherit no-underline">
+            <Link href="/" aria-label="Refresh" className="text-inherit no-underline">
               Refresh
-            </a>
+            </Link>
           </Button>
           <Button variant="outline">
             <a
