@@ -1,0 +1,16 @@
+{
+  "name": "myri-site",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "concurrently -n web,api -c blue,green \"npm run dev -w @myri/web\" \"npm run dev -w @myri/api\"",
+    "build": "npm run build -w @myri/web && npm run build -w @myri/api",
+    "start": "concurrently -n web,api -c blue,green \"npm run start -w @myri/web\" \"npm run start -w @myri/api\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
