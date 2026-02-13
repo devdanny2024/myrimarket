@@ -1,5 +1,6 @@
 import { fetchProduct } from "@/lib/api";
 import { discountPercent, formatBtc, formatNgn } from "@/lib/format";
+import { PayWithPaystackButton } from "@/components/PayWithPaystackButton";
 
 export default async function ProductPage({
   params,
@@ -40,11 +41,9 @@ export default async function ProductPage({
         ) : null}
 
         <div className="mt-6 grid gap-3 sm:grid-cols-2">
-          <button className="h-11 rounded-md bg-slate-900 px-4 text-sm font-medium text-white">
-            Pay with Naira
-          </button>
+          <PayWithPaystackButton product={product} />
           <button className="h-11 rounded-md border border-slate-200 bg-white px-4 text-sm font-medium text-slate-900">
-            Pay with BTC
+            Pay with BTC (coming next)
           </button>
         </div>
 

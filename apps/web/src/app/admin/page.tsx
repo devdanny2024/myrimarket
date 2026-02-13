@@ -36,6 +36,11 @@ export default function AdminPage() {
   useEffect(() => {
     const t = getToken();
     setToken(t);
+    // If no token, move user to admin login
+    if (!t) {
+      window.location.href = "/admin/login";
+      return;
+    }
     load();
   }, []);
 

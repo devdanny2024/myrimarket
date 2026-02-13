@@ -1,5 +1,8 @@
 const express = require("express");
 const cors = require("cors");
+const multer = require("multer");
+const path = require("path");
+const crypto = require("crypto");
 
 const {
   getCategories,
@@ -7,6 +10,8 @@ const {
   saveProducts,
   saveCategories,
 } = require("./store");
+const { getPaystack } = require("./paystack");
+const { createOrder, updateOrder } = require("./orders");
 
 const app = express();
 
@@ -21,6 +26,10 @@ app.use(express.json());
 app.get("/health", (_req, res) => {
   res.json({ ok: true, service: "myri-api", ts: new Date().toISOString() });
 });
+
+// Static uploads (for product images)
+const UPLOAD_DIR = path.join(__dirname, "..", "uploads");
+app.use("/uploads", express.static(UPLOAD_DIR));
 
 // Public catalog
 app.get("/categories", (_req, res) => {
@@ -67,6 +76,30 @@ function requireAdmin(req, res, next) {
   return next();
 }
 
+// Simple admin login check
+app.post("/admin/login", (req, res) => {
+  const token = req.body?.token;
+  if (!process.env.ADMIN_TOKEN) {
+    return res.status(500).json({ error: "ADMIN_TOKEN not configured" });
+  }
+  if (token !== process.env.ADMIN_TOKEN) {
+    return res.status(401).json({ error: "Invalid token" });
+  }
+  return res.json({ ok: true });
+});
+
+// Admin: upload product images
+const fs = require("fs");
+fs.mkdirSync(UPLOAD_DIR, { recursive: true });
+const { makeUploader } = require("./upload");
+const upload = makeUploader(UPLOAD_DIR);
+
+app.post("/admin/upload", requireAdmin, upload.single("file"), (req, res) => {
+  if (!req.file) return res.status(400).json({ error: "No file" });
+  const url = `/uploads/${req.file.filename}`;
+  res.json({ ok: true, url });
+});
+
 // Admin: products
 app.post("/admin/products", requireAdmin, (req, res) => {
   const products = getProducts();
@@ -108,6 +141,81 @@ app.put("/admin/categories", requireAdmin, (req, res) => {
   if (!categories) return res.status(400).json({ error: "Expected array" });
   saveCategories(categories);
   res.json({ ok: true, count: categories.length });
+});
+
+// Paystack: initialize NGN payment
+app.post("/paystack/initialize", async (req, res) => {
+  try {
+    const { email, productId, amountNgn } = req.body ?? {};
+    if (!email || !productId || !amountNgn) {
+      return res.status(400).json({ error: "email, productId, amountNgn are required" });
+    }
+
+    const product = getProducts().find((p) => p.id === productId);
+    if (!product || !product.isActive) {
+      return res.status(404).json({ error: "Product not found" });
+    }
+
+    const amountKobo = Math.round(Number(amountNgn) * 100);
+    const orderId = crypto.randomBytes(12).toString("hex");
+
+    createOrder({
+      id: orderId,
+      productId,
+      email,
+      currency: "NGN",
+      amount: Number(amountNgn),
+      status: "initialized",
+    });
+
+    const paystack = getPaystack();
+    const init = await paystack.transaction.initialize({
+      email,
+      amount: amountKobo,
+      metadata: {
+        orderId,
+        productId,
+      },
+    });
+
+    // init.data.authorization_url
+    updateOrder(orderId, {
+      status: "pending",
+      paystackRef: init?.data?.reference,
+    });
+
+    return res.json({
+      ok: true,
+      orderId,
+      reference: init?.data?.reference,
+      authorization_url: init?.data?.authorization_url,
+    });
+  } catch (e) {
+    return res.status(500).json({ error: e?.message ?? "Paystack initialize failed" });
+  }
+});
+
+// Paystack: verify
+app.get("/paystack/verify/:reference", async (req, res) => {
+  try {
+    const reference = req.params.reference;
+    const paystack = getPaystack();
+    const result = await paystack.transaction.verify(reference);
+    const status = result?.data?.status;
+    const meta = result?.data?.metadata ?? {};
+
+    const orderId = meta.orderId;
+    if (orderId) {
+      updateOrder(orderId, {
+        status: status === "success" ? "paid" : status,
+        paystackRef: reference,
+      });
+    }
+
+    res.json({ ok: true, status, data: result?.data });
+  } catch (e) {
+    res.status(500).json({ error: e?.message ?? "Verify failed" });
+  }
 });
 
 const port = Number(process.env.PORT ?? 4001);
