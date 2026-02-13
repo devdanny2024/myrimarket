@@ -1,0 +1,101 @@
+name: Deploy API to ECS (Fargate)
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "apps/api/**"
+      - ".github/workflows/deploy-api.yml"
+      - ".aws/task-definition.json"
+      - "package-lock.json"
+      - "package.json"
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  AWS_REGION: eu-north-1
+  ECR_REPOSITORY: myri-api
+  ECS_CLUSTER: myri
+  ECS_SERVICE: myri-api
+  CONTAINER_NAME: myri-api
+
+  # Set these as GitHub Repository Variables or Secrets (Settings → Secrets and variables → Actions)
+  # - EXECUTION_ROLE_ARN
+  # - TASK_ROLE_ARN
+  # - DATABASE_URL
+  # - ADMIN_TOKEN
+  # - WEB_ORIGIN
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::811839031800:role/GitHubActionsDeployRole
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Ensure ECR repository exists
+        run: |
+          aws ecr describe-repositories --repository-names "$ECR_REPOSITORY" >/dev/null 2>&1 || \
+          aws ecr create-repository --repository-name "$ECR_REPOSITORY" >/dev/null
+
+      - name: Build, tag, and push image
+        id: build-image
+        env:
+          REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          IMAGE_URI="$REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+          echo "IMAGE_URI=$IMAGE_URI" >> $GITHUB_OUTPUT
+          docker build -f apps/api/Dockerfile -t "$IMAGE_URI" .
+          docker push "$IMAGE_URI"
+
+      - name: Render task definition with image + env
+        id: render-task
+        env:
+          IMAGE_URI: ${{ steps.build-image.outputs.IMAGE_URI }}
+          EXECUTION_ROLE_ARN: ${{ vars.EXECUTION_ROLE_ARN }}
+          TASK_ROLE_ARN: ${{ vars.TASK_ROLE_ARN }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          ADMIN_TOKEN: ${{ secrets.ADMIN_TOKEN }}
+          WEB_ORIGIN: ${{ vars.WEB_ORIGIN }}
+        run: |
+          if [ -z "$EXECUTION_ROLE_ARN" ] || [ -z "$TASK_ROLE_ARN" ]; then
+            echo "Missing EXECUTION_ROLE_ARN or TASK_ROLE_ARN GitHub Variables." >&2
+            exit 1
+          fi
+          if [ -z "$DATABASE_URL" ] || [ -z "$ADMIN_TOKEN" ] || [ -z "$WEB_ORIGIN" ]; then
+            echo "Missing DATABASE_URL / ADMIN_TOKEN (Secrets) or WEB_ORIGIN (Variable)." >&2
+            exit 1
+          fi
+
+          cat .aws/task-definition.json \
+            | sed "s|REPLACE_IMAGE|$IMAGE_URI|g" \
+            | sed "s|REPLACE_EXECUTION_ROLE_ARN|$EXECUTION_ROLE_ARN|g" \
+            | sed "s|REPLACE_TASK_ROLE_ARN|$TASK_ROLE_ARN|g" \
+            | sed "s|REPLACE_DATABASE_URL|$DATABASE_URL|g" \
+            | sed "s|REPLACE_ADMIN_TOKEN|$ADMIN_TOKEN|g" \
+            | sed "s|REPLACE_WEB_ORIGIN|$WEB_ORIGIN|g" \
+            > task-definition.rendered.json
+
+          echo "TASKDEF=task-definition.rendered.json" >> $GITHUB_OUTPUT
+
+      - name: Deploy to ECS
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v2
+        with:
+          task-definition: ${{ steps.render-task.outputs.TASKDEF }}
+          service: ${{ env.ECS_SERVICE }}
+          cluster: ${{ env.ECS_CLUSTER }}
+          wait-for-service-stability: true
