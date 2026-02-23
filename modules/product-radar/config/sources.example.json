@@ -1,0 +1,42 @@
+{
+  "country": "NG",
+  "sources": [
+    {
+      "name": "Google Trends Nigeria",
+      "type": "mock",
+      "enabled": true,
+      "products": [
+        { "name": "Solar Power Bank", "category": "Electronics", "trendVelocity": 90, "marginPotential": 70, "supplierReliability": 72, "deliveryFit": 80, "repeatPotential": 62 },
+        { "name": "Portable Blender", "category": "Kitchen", "trendVelocity": 78, "marginPotential": 74, "supplierReliability": 68, "deliveryFit": 77, "repeatPotential": 55 },
+        { "name": "Waist Trainer", "category": "Fashion", "trendVelocity": 81, "marginPotential": 79, "supplierReliability": 73, "deliveryFit": 85, "repeatPotential": 66 },
+        { "name": "LED Ring Light", "category": "Creator Gear", "trendVelocity": 84, "marginPotential": 69, "supplierReliability": 75, "deliveryFit": 88, "repeatPotential": 71 },
+        { "name": "Baby Diaper Bundle", "category": "Baby Care", "trendVelocity": 74, "marginPotential": 63, "supplierReliability": 84, "deliveryFit": 76, "repeatPotential": 91 },
+        { "name": "Beard Growth Oil", "category": "Personal Care", "trendVelocity": 76, "marginPotential": 82, "supplierReliability": 67, "deliveryFit": 90, "repeatPotential": 79 }
+      ]
+    },
+    {
+      "name": "Jumia NG Popular Searches",
+      "type": "mock",
+      "enabled": true,
+      "products": [
+        { "name": "Wireless Earbuds", "category": "Electronics", "trendVelocity": 85, "marginPotential": 73, "supplierReliability": 70, "deliveryFit": 86, "repeatPotential": 64 },
+        { "name": "Ankara Tote Bag", "category": "Fashion", "trendVelocity": 69, "marginPotential": 77, "supplierReliability": 79, "deliveryFit": 89, "repeatPotential": 67 },
+        { "name": "Car Phone Holder", "category": "Auto", "trendVelocity": 71, "marginPotential": 75, "supplierReliability": 83, "deliveryFit": 92, "repeatPotential": 69 },
+        { "name": "Scented Soy Candle", "category": "Home", "trendVelocity": 66, "marginPotential": 72, "supplierReliability": 74, "deliveryFit": 80, "repeatPotential": 58 },
+        { "name": "Hair Bonnet Silk", "category": "Beauty", "trendVelocity": 72, "marginPotential": 80, "supplierReliability": 76, "deliveryFit": 93, "repeatPotential": 84 }
+      ]
+    },
+    {
+      "name": "TikTok Shop Signals NG",
+      "type": "apiStub",
+      "enabled": true,
+      "envKey": "TIKTOK_SHOP_API_KEY",
+      "stubProducts": [
+        { "name": "Ice Facial Roller", "category": "Beauty", "trendVelocity": 83, "marginPotential": 78, "supplierReliability": 65, "deliveryFit": 87, "repeatPotential": 61 },
+        { "name": "Reusable Oil Spray Bottle", "category": "Kitchen", "trendVelocity": 68, "marginPotential": 71, "supplierReliability": 77, "deliveryFit": 82, "repeatPotential": 73 },
+        { "name": "Gym Resistance Bands", "category": "Fitness", "trendVelocity": 79, "marginPotential": 76, "supplierReliability": 80, "deliveryFit": 88, "repeatPotential": 75 },
+        { "name": "Mini Label Printer", "category": "Office", "trendVelocity": 82, "marginPotential": 68, "supplierReliability": 69, "deliveryFit": 84, "repeatPotential": 57 }
+      ]
+    }
+  ]
+}

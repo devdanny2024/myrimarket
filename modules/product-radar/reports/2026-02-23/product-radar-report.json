@@ -1,0 +1,243 @@
+{
+  "report": "Myri Product Radar V1",
+  "country": "NG",
+  "runDate": "2026-02-23",
+  "runTimestamp": "2026-02-23T13:55:59.483Z",
+  "weights": {
+    "trendVelocity": 30,
+    "marginPotential": 25,
+    "supplierReliability": 20,
+    "deliveryFit": 15,
+    "repeatPotential": 10
+  },
+  "signalsIngested": 15,
+  "uniqueCandidates": 15,
+  "topProducts": [
+    {
+      "name": "Gym Resistance Bands",
+      "category": "Fitness",
+      "trendVelocity": 79,
+      "marginPotential": 76,
+      "supplierReliability": 80,
+      "deliveryFit": 88,
+      "repeatPotential": 75,
+      "source": "TikTok Shop Signals NG",
+      "sourceType": "apiStub",
+      "sourceStatus": "stubbed-awaiting-api-key",
+      "country": "NG",
+      "notes": [
+        "Source TikTok Shop Signals NG is stubbed. Configure TIKTOK_SHOP_API_KEY to enable live ingestion."
+      ],
+      "scoreBreakdown": {
+        "trendVelocity": 79,
+        "marginPotential": 76,
+        "supplierReliability": 80,
+        "deliveryFit": 88,
+        "repeatPotential": 75
+      },
+      "weightedScore": 79.4,
+      "rank": 1
+    },
+    {
+      "name": "Hair Bonnet Silk",
+      "category": "Beauty",
+      "trendVelocity": 72,
+      "marginPotential": 80,
+      "supplierReliability": 76,
+      "deliveryFit": 93,
+      "repeatPotential": 84,
+      "source": "Jumia NG Popular Searches",
+      "sourceType": "mock",
+      "sourceStatus": "live-mock",
+      "country": "NG",
+      "scoreBreakdown": {
+        "trendVelocity": 72,
+        "marginPotential": 80,
+        "supplierReliability": 76,
+        "deliveryFit": 93,
+        "repeatPotential": 84
+      },
+      "weightedScore": 79.15,
+      "rank": 2
+    },
+    {
+      "name": "Beard Growth Oil",
+      "category": "Personal Care",
+      "trendVelocity": 76,
+      "marginPotential": 82,
+      "supplierReliability": 67,
+      "deliveryFit": 90,
+      "repeatPotential": 79,
+      "source": "Google Trends Nigeria",
+      "sourceType": "mock",
+      "sourceStatus": "live-mock",
+      "country": "NG",
+      "scoreBreakdown": {
+        "trendVelocity": 76,
+        "marginPotential": 82,
+        "supplierReliability": 67,
+        "deliveryFit": 90,
+        "repeatPotential": 79
+      },
+      "weightedScore": 78.1,
+      "rank": 3
+    },
+    {
+      "name": "Waist Trainer",
+      "category": "Fashion",
+      "trendVelocity": 81,
+      "marginPotential": 79,
+      "supplierReliability": 73,
+      "deliveryFit": 85,
+      "repeatPotential": 66,
+      "source": "Google Trends Nigeria",
+      "sourceType": "mock",
+      "sourceStatus": "live-mock",
+      "country": "NG",
+      "scoreBreakdown": {
+        "trendVelocity": 81,
+        "marginPotential": 79,
+        "supplierReliability": 73,
+        "deliveryFit": 85,
+        "repeatPotential": 66
+      },
+      "weightedScore": 78,
+      "rank": 4
+    },
+    {
+      "name": "LED Ring Light",
+      "category": "Creator Gear",
+      "trendVelocity": 84,
+      "marginPotential": 69,
+      "supplierReliability": 75,
+      "deliveryFit": 88,
+      "repeatPotential": 71,
+      "source": "Google Trends Nigeria",
+      "sourceType": "mock",
+      "sourceStatus": "live-mock",
+      "country": "NG",
+      "scoreBreakdown": {
+        "trendVelocity": 84,
+        "marginPotential": 69,
+        "supplierReliability": 75,
+        "deliveryFit": 88,
+        "repeatPotential": 71
+      },
+      "weightedScore": 77.75,
+      "rank": 5
+    },
+    {
+      "name": "Car Phone Holder",
+      "category": "Auto",
+      "trendVelocity": 71,
+      "marginPotential": 75,
+      "supplierReliability": 83,
+      "deliveryFit": 92,
+      "repeatPotential": 69,
+      "source": "Jumia NG Popular Searches",
+      "sourceType": "mock",
+      "sourceStatus": "live-mock",
+      "country": "NG",
+      "scoreBreakdown": {
+        "trendVelocity": 71,
+        "marginPotential": 75,
+        "supplierReliability": 83,
+        "deliveryFit": 92,
+        "repeatPotential": 69
+      },
+      "weightedScore": 77.35,
+      "rank": 6
+    },
+    {
+      "name": "Solar Power Bank",
+      "category": "Electronics",
+      "trendVelocity": 90,
+      "marginPotential": 70,
+      "supplierReliability": 72,
+      "deliveryFit": 80,
+      "repeatPotential": 62,
+      "source": "Google Trends Nigeria",
+      "sourceType": "mock",
+      "sourceStatus": "live-mock",
+      "country": "NG",
+      "scoreBreakdown": {
+        "trendVelocity": 90,
+        "marginPotential": 70,
+        "supplierReliability": 72,
+        "deliveryFit": 80,
+        "repeatPotential": 62
+      },
+      "weightedScore": 77.1,
+      "rank": 7
+    },
+    {
+      "name": "Wireless Earbuds",
+      "category": "Electronics",
+      "trendVelocity": 85,
+      "marginPotential": 73,
+      "supplierReliability": 70,
+      "deliveryFit": 86,
+      "repeatPotential": 64,
+      "source": "Jumia NG Popular Searches",
+      "sourceType": "mock",
+      "sourceStatus": "live-mock",
+      "country": "NG",
+      "scoreBreakdown": {
+        "trendVelocity": 85,
+        "marginPotential": 73,
+        "supplierReliability": 70,
+        "deliveryFit": 86,
+        "repeatPotential": 64
+      },
+      "weightedScore": 77.05,
+      "rank": 8
+    },
+    {
+      "name": "Ice Facial Roller",
+      "category": "Beauty",
+      "trendVelocity": 83,
+      "marginPotential": 78,
+      "supplierReliability": 65,
+      "deliveryFit": 87,
+      "repeatPotential": 61,
+      "source": "TikTok Shop Signals NG",
+      "sourceType": "apiStub",
+      "sourceStatus": "stubbed-awaiting-api-key",
+      "country": "NG",
+      "notes": [
+        "Source TikTok Shop Signals NG is stubbed. Configure TIKTOK_SHOP_API_KEY to enable live ingestion."
+      ],
+      "scoreBreakdown": {
+        "trendVelocity": 83,
+        "marginPotential": 78,
+        "supplierReliability": 65,
+        "deliveryFit": 87,
+        "repeatPotential": 61
+      },
+      "weightedScore": 76.55,
+      "rank": 9
+    },
+    {
+      "name": "Ankara Tote Bag",
+      "category": "Fashion",
+      "trendVelocity": 69,
+      "marginPotential": 77,
+      "supplierReliability": 79,
+      "deliveryFit": 89,
+      "repeatPotential": 67,
+      "source": "Jumia NG Popular Searches",
+      "sourceType": "mock",
+      "sourceStatus": "live-mock",
+      "country": "NG",
+      "scoreBreakdown": {
+        "trendVelocity": 69,
+        "marginPotential": 77,
+        "supplierReliability": 79,
+        "deliveryFit": 89,
+        "repeatPotential": 67
+      },
+      "weightedScore": 75.8,
+      "rank": 10
+    }
+  ]
+}
