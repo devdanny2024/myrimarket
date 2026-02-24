@@ -6,24 +6,133 @@
       "type": "mock",
       "enabled": true,
       "products": [
-        { "name": "Solar Power Bank", "category": "Electronics", "trendVelocity": 90, "marginPotential": 70, "supplierReliability": 72, "deliveryFit": 80, "repeatPotential": 62 },
-        { "name": "Portable Blender", "category": "Kitchen", "trendVelocity": 78, "marginPotential": 74, "supplierReliability": 68, "deliveryFit": 77, "repeatPotential": 55 },
-        { "name": "Waist Trainer", "category": "Fashion", "trendVelocity": 81, "marginPotential": 79, "supplierReliability": 73, "deliveryFit": 85, "repeatPotential": 66 },
-        { "name": "LED Ring Light", "category": "Creator Gear", "trendVelocity": 84, "marginPotential": 69, "supplierReliability": 75, "deliveryFit": 88, "repeatPotential": 71 },
-        { "name": "Baby Diaper Bundle", "category": "Baby Care", "trendVelocity": 74, "marginPotential": 63, "supplierReliability": 84, "deliveryFit": 76, "repeatPotential": 91 },
-        { "name": "Beard Growth Oil", "category": "Personal Care", "trendVelocity": 76, "marginPotential": 82, "supplierReliability": 67, "deliveryFit": 90, "repeatPotential": 79 }
+        {
+          "name": "Solar Power Bank",
+          "category": "Electronics",
+          "trendVelocity": 90,
+          "marginPotential": 70,
+          "supplierReliability": 72,
+          "deliveryFit": 80,
+          "repeatPotential": 62
+        },
+        {
+          "name": "Portable Blender",
+          "category": "Kitchen",
+          "trendVelocity": 78,
+          "marginPotential": 74,
+          "supplierReliability": 68,
+          "deliveryFit": 77,
+          "repeatPotential": 55
+        },
+        {
+          "name": "Waist Trainer",
+          "category": "Fashion",
+          "trendVelocity": 81,
+          "marginPotential": 79,
+          "supplierReliability": 73,
+          "deliveryFit": 85,
+          "repeatPotential": 66
+        },
+        {
+          "name": "LED Ring Light",
+          "category": "Creator Gear",
+          "trendVelocity": 84,
+          "marginPotential": 69,
+          "supplierReliability": 75,
+          "deliveryFit": 88,
+          "repeatPotential": 71
+        },
+        {
+          "name": "Baby Diaper Bundle",
+          "category": "Baby Care",
+          "trendVelocity": 74,
+          "marginPotential": 63,
+          "supplierReliability": 84,
+          "deliveryFit": 76,
+          "repeatPotential": 91
+        },
+        {
+          "name": "Beard Growth Oil",
+          "category": "Personal Care",
+          "trendVelocity": 76,
+          "marginPotential": 82,
+          "supplierReliability": 67,
+          "deliveryFit": 90,
+          "repeatPotential": 79
+        }
       ]
     },
     {
-      "name": "Jumia NG Popular Searches",
+      "name": "Jumia NG Popular Products",
       "type": "mock",
       "enabled": true,
       "products": [
-        { "name": "Wireless Earbuds", "category": "Electronics", "productUrl": "https://www.jumia.com.ng/catalog/?q=wireless%20earbuds", "trendVelocity": 85, "marginPotential": 73, "supplierReliability": 70, "deliveryFit": 86, "repeatPotential": 64 },
-        { "name": "Ankara Tote Bag", "category": "Fashion", "productUrl": "https://www.jumia.com.ng/catalog/?q=ankara%20tote%20bag", "trendVelocity": 69, "marginPotential": 77, "supplierReliability": 79, "deliveryFit": 89, "repeatPotential": 67 },
-        { "name": "Car Phone Holder", "category": "Auto", "productUrl": "https://www.jumia.com.ng/catalog/?q=car%20phone%20holder", "trendVelocity": 71, "marginPotential": 75, "supplierReliability": 83, "deliveryFit": 92, "repeatPotential": 69 },
-        { "name": "Scented Soy Candle", "category": "Home", "productUrl": "https://www.jumia.com.ng/catalog/?q=scented%20soy%20candle", "trendVelocity": 66, "marginPotential": 72, "supplierReliability": 74, "deliveryFit": 80, "repeatPotential": 58 },
-        { "name": "Hair Bonnet Silk", "category": "Beauty", "productUrl": "https://www.jumia.com.ng/catalog/?q=hair%20bonnet%20silk", "trendVelocity": 72, "marginPotential": 80, "supplierReliability": 76, "deliveryFit": 93, "repeatPotential": 84 }
+        {
+          "name": "Wireless Earbuds",
+          "category": "Electronics",
+          "productUrl": "https://www.jumia.com.ng/generic-tws-wireless-bluetooth-earbuds-5.3-noise-cancelling-black-347812509.html",
+          "fallbackProductUrls": [
+            "https://www.jumia.com.ng/generic-wireless-bluetooth-earbuds-pro-3-338991644.html",
+            "https://www.jumia.com.ng/generic-lenovo-livepods-lp40-pro-wireless-earbuds-315655429.html"
+          ],
+          "trendVelocity": 85,
+          "marginPotential": 73,
+          "supplierReliability": 70,
+          "deliveryFit": 86,
+          "repeatPotential": 64
+        },
+        {
+          "name": "Ankara Tote Bag",
+          "category": "Fashion",
+          "productUrl": "https://www.jumia.com.ng/fashion-african-print-ankara-tote-bag-multicolor-238021772.html",
+          "fallbackProductUrls": [
+            "https://www.jumia.com.ng/fashion-ankara-shoulder-tote-bag-245669041.html"
+          ],
+          "trendVelocity": 69,
+          "marginPotential": 77,
+          "supplierReliability": 79,
+          "deliveryFit": 89,
+          "repeatPotential": 67
+        },
+        {
+          "name": "Car Phone Holder",
+          "category": "Auto",
+          "productUrl": "https://www.jumia.com.ng/generic-car-dashboard-phone-holder-360-rotation-209303233.html",
+          "fallbackProductUrls": [
+            "https://www.jumia.com.ng/generic-gravity-car-air-vent-phone-holder-282189014.html"
+          ],
+          "trendVelocity": 71,
+          "marginPotential": 75,
+          "supplierReliability": 83,
+          "deliveryFit": 92,
+          "repeatPotential": 69
+        },
+        {
+          "name": "Scented Soy Candle",
+          "category": "Home",
+          "productUrl": "https://www.jumia.com.ng/generic-scented-soy-candle-vanilla-lavender-281822550.html",
+          "fallbackProductUrls": [
+            "https://www.jumia.com.ng/generic-natural-soy-wax-candle-amber-jar-273155201.html"
+          ],
+          "trendVelocity": 66,
+          "marginPotential": 72,
+          "supplierReliability": 74,
+          "deliveryFit": 80,
+          "repeatPotential": 58
+        },
+        {
+          "name": "Hair Bonnet Silk",
+          "category": "Beauty",
+          "productUrl": "https://www.jumia.com.ng/generic-double-layer-satin-bonnet-silk-hair-cap-black-326003419.html",
+          "fallbackProductUrls": [
+            "https://www.jumia.com.ng/generic-adjustable-silk-satin-hair-bonnet-299086219.html"
+          ],
+          "trendVelocity": 72,
+          "marginPotential": 80,
+          "supplierReliability": 76,
+          "deliveryFit": 93,
+          "repeatPotential": 84
+        }
       ]
     },
     {
@@ -32,10 +141,58 @@
       "enabled": true,
       "envKey": "TIKTOK_SHOP_API_KEY",
       "stubProducts": [
-        { "name": "Ice Facial Roller", "category": "Beauty", "fallbackProductUrls": ["https://www.tiktok.com/search?q=ice%20facial%20roller"], "trendVelocity": 83, "marginPotential": 78, "supplierReliability": 65, "deliveryFit": 87, "repeatPotential": 61 },
-        { "name": "Reusable Oil Spray Bottle", "category": "Kitchen", "fallbackProductUrls": ["https://www.tiktok.com/search?q=reusable%20oil%20spray%20bottle"], "trendVelocity": 68, "marginPotential": 71, "supplierReliability": 77, "deliveryFit": 82, "repeatPotential": 73 },
-        { "name": "Gym Resistance Bands", "category": "Fitness", "fallbackProductUrls": ["https://www.tiktok.com/search?q=gym%20resistance%20bands"], "trendVelocity": 79, "marginPotential": 76, "supplierReliability": 80, "deliveryFit": 88, "repeatPotential": 75 },
-        { "name": "Mini Label Printer", "category": "Office", "fallbackProductUrls": ["https://www.tiktok.com/search?q=mini%20label%20printer"], "trendVelocity": 82, "marginPotential": 68, "supplierReliability": 69, "deliveryFit": 84, "repeatPotential": 57 }
+        {
+          "name": "Ice Facial Roller",
+          "category": "Beauty",
+          "productUrl": "https://shop.tiktok.com/view/product/1730669949094893394",
+          "fallbackProductUrls": [
+            "https://shop.tiktok.com/view/product/1730674584471750128"
+          ],
+          "trendVelocity": 83,
+          "marginPotential": 78,
+          "supplierReliability": 65,
+          "deliveryFit": 87,
+          "repeatPotential": 61
+        },
+        {
+          "name": "Reusable Oil Spray Bottle",
+          "category": "Kitchen",
+          "productUrl": "https://shop.tiktok.com/view/product/1729386117639244707",
+          "fallbackProductUrls": [
+            "https://shop.tiktok.com/view/product/1729147779401468419"
+          ],
+          "trendVelocity": 68,
+          "marginPotential": 71,
+          "supplierReliability": 77,
+          "deliveryFit": 82,
+          "repeatPotential": 73
+        },
+        {
+          "name": "Gym Resistance Bands",
+          "category": "Fitness",
+          "productUrl": "https://shop.tiktok.com/view/product/1729995509023018042",
+          "fallbackProductUrls": [
+            "https://shop.tiktok.com/view/product/1729771846209109173"
+          ],
+          "trendVelocity": 79,
+          "marginPotential": 76,
+          "supplierReliability": 80,
+          "deliveryFit": 88,
+          "repeatPotential": 75
+        },
+        {
+          "name": "Mini Label Printer",
+          "category": "Office",
+          "productUrl": "https://shop.tiktok.com/view/product/1728812374027746651",
+          "fallbackProductUrls": [
+            "https://shop.tiktok.com/view/product/1729117539276334930"
+          ],
+          "trendVelocity": 82,
+          "marginPotential": 68,
+          "supplierReliability": 69,
+          "deliveryFit": 84,
+          "repeatPotential": 57
+        }
       ]
     },
     {
@@ -44,8 +201,32 @@
       "enabled": true,
       "envKey": "ALIEXPRESS_API_KEY",
       "stubProducts": [
-        { "name": "USB Rechargeable Table Fan", "category": "Home", "fallbackProductUrls": ["https://www.aliexpress.com/wholesale?SearchText=USB%20rechargeable%20table%20fan"], "trendVelocity": 73, "marginPotential": 81, "supplierReliability": 71, "deliveryFit": 78, "repeatPotential": 63 },
-        { "name": "Portable Sealing Machine", "category": "Kitchen", "fallbackProductUrls": ["https://www.aliexpress.com/wholesale?SearchText=portable%20sealing%20machine"], "trendVelocity": 70, "marginPotential": 79, "supplierReliability": 74, "deliveryFit": 80, "repeatPotential": 66 }
+        {
+          "name": "USB Rechargeable Table Fan",
+          "category": "Home",
+          "productUrl": "https://www.aliexpress.com/item/1005007123952481.html",
+          "fallbackProductUrls": [
+            "https://www.aliexpress.com/item/1005006953210887.html"
+          ],
+          "trendVelocity": 73,
+          "marginPotential": 81,
+          "supplierReliability": 71,
+          "deliveryFit": 78,
+          "repeatPotential": 63
+        },
+        {
+          "name": "Portable Sealing Machine",
+          "category": "Kitchen",
+          "productUrl": "https://www.aliexpress.com/item/1005006279837253.html",
+          "fallbackProductUrls": [
+            "https://www.aliexpress.com/item/1005006011194465.html"
+          ],
+          "trendVelocity": 70,
+          "marginPotential": 79,
+          "supplierReliability": 74,
+          "deliveryFit": 80,
+          "repeatPotential": 66
+        }
       ]
     }
   ]

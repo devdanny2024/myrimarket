@@ -1,8 +1,8 @@
 {
   "report": "Myri Product Radar V1",
   "country": "NG",
-  "runDate": "2026-02-23",
-  "runTimestamp": "2026-02-23T14:05:38.646Z",
+  "runDate": "2026-02-24",
+  "runTimestamp": "2026-02-24T09:24:24.336Z",
   "weights": {
     "trendVelocity": 30,
     "marginPotential": 25,
@@ -10,12 +10,16 @@
     "deliveryFit": 15,
     "repeatPotential": 10
   },
-  "signalsIngested": 15,
-  "uniqueCandidates": 15,
+  "signalsIngested": 17,
+  "uniqueCandidates": 17,
   "topProducts": [
     {
       "name": "Gym Resistance Bands",
       "category": "Fitness",
+      "productUrl": "https://shop.tiktok.com/view/product/1729995509023018042",
+      "fallbackProductUrls": [
+        "https://shop.tiktok.com/view/product/1729771846209109173"
+      ],
       "trendVelocity": 79,
       "marginPotential": 76,
       "supplierReliability": 80,
@@ -28,7 +32,6 @@
       "notes": [
         "Source TikTok Shop Signals NG is stubbed. Configure TIKTOK_SHOP_API_KEY to enable live ingestion."
       ],
-      "productUrl": "https://www.google.com/search?q=Gym%20Resistance%20Bands%20Nigeria",
       "scoreBreakdown": {
         "trendVelocity": 79,
         "marginPotential": 76,
@@ -42,16 +45,19 @@
     {
       "name": "Hair Bonnet Silk",
       "category": "Beauty",
+      "productUrl": "https://www.jumia.com.ng/generic-double-layer-satin-bonnet-silk-hair-cap-black-326003419.html",
+      "fallbackProductUrls": [
+        "https://www.jumia.com.ng/generic-adjustable-silk-satin-hair-bonnet-299086219.html"
+      ],
       "trendVelocity": 72,
       "marginPotential": 80,
       "supplierReliability": 76,
       "deliveryFit": 93,
       "repeatPotential": 84,
-      "source": "Jumia NG Popular Searches",
+      "source": "Jumia NG Popular Products",
       "sourceType": "mock",
       "sourceStatus": "live-mock",
       "country": "NG",
-      "productUrl": "https://www.google.com/search?q=Hair%20Bonnet%20Silk%20Nigeria",
       "scoreBreakdown": {
         "trendVelocity": 72,
         "marginPotential": 80,
@@ -74,7 +80,8 @@
       "sourceType": "mock",
       "sourceStatus": "live-mock",
       "country": "NG",
-      "productUrl": "https://www.google.com/search?q=Beard%20Growth%20Oil%20Nigeria",
+      "productUrl": "",
+      "fallbackProductUrls": [],
       "scoreBreakdown": {
         "trendVelocity": 76,
         "marginPotential": 82,
@@ -97,7 +104,8 @@
       "sourceType": "mock",
       "sourceStatus": "live-mock",
       "country": "NG",
-      "productUrl": "https://www.google.com/search?q=Waist%20Trainer%20Nigeria",
+      "productUrl": "",
+      "fallbackProductUrls": [],
       "scoreBreakdown": {
         "trendVelocity": 81,
         "marginPotential": 79,
@@ -120,7 +128,8 @@
       "sourceType": "mock",
       "sourceStatus": "live-mock",
       "country": "NG",
-      "productUrl": "https://www.google.com/search?q=LED%20Ring%20Light%20Nigeria",
+      "productUrl": "",
+      "fallbackProductUrls": [],
       "scoreBreakdown": {
         "trendVelocity": 84,
         "marginPotential": 69,
@@ -134,16 +143,19 @@
     {
       "name": "Car Phone Holder",
       "category": "Auto",
+      "productUrl": "https://www.jumia.com.ng/generic-car-dashboard-phone-holder-360-rotation-209303233.html",
+      "fallbackProductUrls": [
+        "https://www.jumia.com.ng/generic-gravity-car-air-vent-phone-holder-282189014.html"
+      ],
       "trendVelocity": 71,
       "marginPotential": 75,
       "supplierReliability": 83,
       "deliveryFit": 92,
       "repeatPotential": 69,
-      "source": "Jumia NG Popular Searches",
+      "source": "Jumia NG Popular Products",
       "sourceType": "mock",
       "sourceStatus": "live-mock",
       "country": "NG",
-      "productUrl": "https://www.google.com/search?q=Car%20Phone%20Holder%20Nigeria",
       "scoreBreakdown": {
         "trendVelocity": 71,
         "marginPotential": 75,
@@ -166,7 +178,8 @@
       "sourceType": "mock",
       "sourceStatus": "live-mock",
       "country": "NG",
-      "productUrl": "https://www.google.com/search?q=Solar%20Power%20Bank%20Nigeria",
+      "productUrl": "",
+      "fallbackProductUrls": [],
       "scoreBreakdown": {
         "trendVelocity": 90,
         "marginPotential": 70,
@@ -180,16 +193,20 @@
     {
       "name": "Wireless Earbuds",
       "category": "Electronics",
+      "productUrl": "https://www.jumia.com.ng/generic-tws-wireless-bluetooth-earbuds-5.3-noise-cancelling-black-347812509.html",
+      "fallbackProductUrls": [
+        "https://www.jumia.com.ng/generic-wireless-bluetooth-earbuds-pro-3-338991644.html",
+        "https://www.jumia.com.ng/generic-lenovo-livepods-lp40-pro-wireless-earbuds-315655429.html"
+      ],
       "trendVelocity": 85,
       "marginPotential": 73,
       "supplierReliability": 70,
       "deliveryFit": 86,
       "repeatPotential": 64,
-      "source": "Jumia NG Popular Searches",
+      "source": "Jumia NG Popular Products",
       "sourceType": "mock",
       "sourceStatus": "live-mock",
       "country": "NG",
-      "productUrl": "https://www.google.com/search?q=Wireless%20Earbuds%20Nigeria",
       "scoreBreakdown": {
         "trendVelocity": 85,
         "marginPotential": 73,
@@ -203,6 +220,10 @@
     {
       "name": "Ice Facial Roller",
       "category": "Beauty",
+      "productUrl": "https://shop.tiktok.com/view/product/1730669949094893394",
+      "fallbackProductUrls": [
+        "https://shop.tiktok.com/view/product/1730674584471750128"
+      ],
       "trendVelocity": 83,
       "marginPotential": 78,
       "supplierReliability": 65,
@@ -215,7 +236,6 @@
       "notes": [
         "Source TikTok Shop Signals NG is stubbed. Configure TIKTOK_SHOP_API_KEY to enable live ingestion."
       ],
-      "productUrl": "https://www.google.com/search?q=Ice%20Facial%20Roller%20Nigeria",
       "scoreBreakdown": {
         "trendVelocity": 83,
         "marginPotential": 78,
@@ -229,16 +249,19 @@
     {
       "name": "Ankara Tote Bag",
       "category": "Fashion",
+      "productUrl": "https://www.jumia.com.ng/fashion-african-print-ankara-tote-bag-multicolor-238021772.html",
+      "fallbackProductUrls": [
+        "https://www.jumia.com.ng/fashion-ankara-shoulder-tote-bag-245669041.html"
+      ],
       "trendVelocity": 69,
       "marginPotential": 77,
       "supplierReliability": 79,
       "deliveryFit": 89,
       "repeatPotential": 67,
-      "source": "Jumia NG Popular Searches",
+      "source": "Jumia NG Popular Products",
       "sourceType": "mock",
       "sourceStatus": "live-mock",
       "country": "NG",
-      "productUrl": "https://www.google.com/search?q=Ankara%20Tote%20Bag%20Nigeria",
       "scoreBreakdown": {
         "trendVelocity": 69,
         "marginPotential": 77,

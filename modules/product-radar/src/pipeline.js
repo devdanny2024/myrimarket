@@ -39,10 +39,6 @@ function normalizeUrl(value) {
   return `https://${trimmed.replace(/^\/+/, '')}`;
 }
 
-function slugifyForSearch(value) {
-  return encodeURIComponent(String(value || '').trim());
-}
-
 function dedupeUrls(urls) {
   const seen = new Set();
   return (urls || []).filter((u) => {
@@ -55,64 +51,31 @@ function dedupeUrls(urls) {
 
 function resolveJumiaLinks(product) {
   const direct = normalizeUrl(product.productUrl || product.sourceProductUrl || product.jumiaUrl);
-  if (direct) {
-    return {
-      productUrl: direct,
-      fallbackProductUrls: dedupeUrls(product.fallbackProductUrls || product.candidateProductUrls),
-    };
-  }
-
-  const query = slugifyForSearch(product.name);
   const sourceCandidates = dedupeUrls(product.fallbackProductUrls || product.candidateProductUrls);
-  const generatedCandidates = dedupeUrls([
-    `https://www.jumia.com.ng/catalog/?q=${query}`,
-  ]);
 
   return {
-    productUrl: sourceCandidates[0] || generatedCandidates[0] || '',
-    fallbackProductUrls: dedupeUrls([...sourceCandidates, ...generatedCandidates]),
+    productUrl: direct || sourceCandidates[0] || '',
+    fallbackProductUrls: sourceCandidates,
   };
 }
 
 function resolveAliExpressLinks(product) {
   const direct = normalizeUrl(product.productUrl || product.sourceProductUrl || product.aliExpressUrl);
-  if (direct) {
-    return {
-      productUrl: direct,
-      fallbackProductUrls: dedupeUrls(product.fallbackProductUrls || product.candidateProductUrls),
-    };
-  }
-
-  const query = slugifyForSearch(product.name);
   const sourceCandidates = dedupeUrls(product.fallbackProductUrls || product.candidateProductUrls);
-  const generatedCandidates = dedupeUrls([
-    `https://www.aliexpress.com/wholesale?SearchText=${query}`,
-  ]);
 
   return {
-    productUrl: sourceCandidates[0] || generatedCandidates[0] || '',
-    fallbackProductUrls: dedupeUrls([...sourceCandidates, ...generatedCandidates]),
+    productUrl: direct || sourceCandidates[0] || '',
+    fallbackProductUrls: sourceCandidates,
   };
 }
 
 function resolveTikTokShopLinks(product) {
   const direct = normalizeUrl(product.productUrl || product.sourceProductUrl || product.tiktokShopUrl);
-  if (direct) {
-    return {
-      productUrl: direct,
-      fallbackProductUrls: dedupeUrls(product.fallbackProductUrls || product.candidateProductUrls),
-    };
-  }
-
-  const query = slugifyForSearch(product.name);
   const sourceCandidates = dedupeUrls(product.fallbackProductUrls || product.candidateProductUrls);
-  const generatedCandidates = dedupeUrls([
-    `https://www.tiktok.com/search?q=${query}`,
-  ]);
 
   return {
-    productUrl: sourceCandidates[0] || generatedCandidates[0] || '',
-    fallbackProductUrls: dedupeUrls([...sourceCandidates, ...generatedCandidates]),
+    productUrl: direct || sourceCandidates[0] || '',
+    fallbackProductUrls: sourceCandidates,
   };
 }
 
@@ -254,10 +217,10 @@ function buildMarkdown(report) {
   const lines = report.topProducts.map((p) => {
     const b = p.scoreBreakdown;
     const fallbackLine = (p.fallbackProductUrls || []).length
-      ? `\n- Fallback Source Links: ${(p.fallbackProductUrls || []).join(' | ')}`
+      ? `\n- Fallback Candidate Links: ${(p.fallbackProductUrls || []).join(' | ')}`
       : '';
 
-    return `\n### #${p.rank} ${p.name} — ${p.weightedScore}/100\n- Category: ${p.category || 'N/A'}\n- Source: ${p.source} (${p.sourceStatus})\n- Product Link: ${p.productUrl || 'N/A'}${fallbackLine}\n- Trend Velocity: ${b.trendVelocity}\n- Margin Potential: ${b.marginPotential}\n- Supplier Reliability: ${b.supplierReliability}\n- Delivery Fit: ${b.deliveryFit}\n- Repeat Potential: ${b.repeatPotential}`;
+    return `\n### #${p.rank} ${p.name} — ${p.weightedScore}/100\n- Category: ${p.category || 'N/A'}\n- Source: ${p.source} (${p.sourceStatus})\n- Supplier/Product URL: ${p.productUrl || 'N/A'}${fallbackLine}\n- Trend Velocity: ${b.trendVelocity}\n- Margin Potential: ${b.marginPotential}\n- Supplier Reliability: ${b.supplierReliability}\n- Delivery Fit: ${b.deliveryFit}\n- Repeat Potential: ${b.repeatPotential}`;
   });
 
   return `${header}\n${lines.join('\n')}`;
@@ -267,9 +230,12 @@ function buildTelegramSummary(report) {
   const top5 = report.topProducts.slice(0, 5);
   const body = top5
     .map((p) => {
-      const fallback = (p.fallbackProductUrls || [])[0];
-      const link = p.productUrl || fallback || 'N/A';
-      return `${p.rank}) ${p.name} — ${p.weightedScore}/100\n   Product: ${link}`;
+      const fallbackCandidates = p.fallbackProductUrls || [];
+      const link = p.productUrl || fallbackCandidates[0] || 'N/A';
+      const candidateLine = fallbackCandidates.length
+        ? `\n   Candidates: ${fallbackCandidates.slice(0, 2).join(' | ')}`
+        : '';
+      return `${p.rank}) ${p.name} — ${p.weightedScore}/100\n   URL: ${link}${candidateLine}`;
     })
     .join('\n');
 

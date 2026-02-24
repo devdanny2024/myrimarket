@@ -17,6 +17,7 @@ Automated product opportunity radar focused on **Nigeria (NG)**.
    - `product-radar-report.md`
 5. Generates Telegram-ready summary:
    - `telegram-summary.txt`
+6. Preserves source-provided direct supplier/product URLs (`productUrl`) and includes fallback candidate links (`fallbackProductUrls`)
 
 ## Run manually
 
