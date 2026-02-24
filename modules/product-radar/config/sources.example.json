@@ -19,11 +19,11 @@
       "type": "mock",
       "enabled": true,
       "products": [
-        { "name": "Wireless Earbuds", "category": "Electronics", "trendVelocity": 85, "marginPotential": 73, "supplierReliability": 70, "deliveryFit": 86, "repeatPotential": 64 },
-        { "name": "Ankara Tote Bag", "category": "Fashion", "trendVelocity": 69, "marginPotential": 77, "supplierReliability": 79, "deliveryFit": 89, "repeatPotential": 67 },
-        { "name": "Car Phone Holder", "category": "Auto", "trendVelocity": 71, "marginPotential": 75, "supplierReliability": 83, "deliveryFit": 92, "repeatPotential": 69 },
-        { "name": "Scented Soy Candle", "category": "Home", "trendVelocity": 66, "marginPotential": 72, "supplierReliability": 74, "deliveryFit": 80, "repeatPotential": 58 },
-        { "name": "Hair Bonnet Silk", "category": "Beauty", "trendVelocity": 72, "marginPotential": 80, "supplierReliability": 76, "deliveryFit": 93, "repeatPotential": 84 }
+        { "name": "Wireless Earbuds", "category": "Electronics", "productUrl": "https://www.jumia.com.ng/catalog/?q=wireless%20earbuds", "trendVelocity": 85, "marginPotential": 73, "supplierReliability": 70, "deliveryFit": 86, "repeatPotential": 64 },
+        { "name": "Ankara Tote Bag", "category": "Fashion", "productUrl": "https://www.jumia.com.ng/catalog/?q=ankara%20tote%20bag", "trendVelocity": 69, "marginPotential": 77, "supplierReliability": 79, "deliveryFit": 89, "repeatPotential": 67 },
+        { "name": "Car Phone Holder", "category": "Auto", "productUrl": "https://www.jumia.com.ng/catalog/?q=car%20phone%20holder", "trendVelocity": 71, "marginPotential": 75, "supplierReliability": 83, "deliveryFit": 92, "repeatPotential": 69 },
+        { "name": "Scented Soy Candle", "category": "Home", "productUrl": "https://www.jumia.com.ng/catalog/?q=scented%20soy%20candle", "trendVelocity": 66, "marginPotential": 72, "supplierReliability": 74, "deliveryFit": 80, "repeatPotential": 58 },
+        { "name": "Hair Bonnet Silk", "category": "Beauty", "productUrl": "https://www.jumia.com.ng/catalog/?q=hair%20bonnet%20silk", "trendVelocity": 72, "marginPotential": 80, "supplierReliability": 76, "deliveryFit": 93, "repeatPotential": 84 }
       ]
     },
     {
@@ -32,10 +32,20 @@
       "enabled": true,
       "envKey": "TIKTOK_SHOP_API_KEY",
       "stubProducts": [
-        { "name": "Ice Facial Roller", "category": "Beauty", "trendVelocity": 83, "marginPotential": 78, "supplierReliability": 65, "deliveryFit": 87, "repeatPotential": 61 },
-        { "name": "Reusable Oil Spray Bottle", "category": "Kitchen", "trendVelocity": 68, "marginPotential": 71, "supplierReliability": 77, "deliveryFit": 82, "repeatPotential": 73 },
-        { "name": "Gym Resistance Bands", "category": "Fitness", "trendVelocity": 79, "marginPotential": 76, "supplierReliability": 80, "deliveryFit": 88, "repeatPotential": 75 },
-        { "name": "Mini Label Printer", "category": "Office", "trendVelocity": 82, "marginPotential": 68, "supplierReliability": 69, "deliveryFit": 84, "repeatPotential": 57 }
+        { "name": "Ice Facial Roller", "category": "Beauty", "fallbackProductUrls": ["https://www.tiktok.com/search?q=ice%20facial%20roller"], "trendVelocity": 83, "marginPotential": 78, "supplierReliability": 65, "deliveryFit": 87, "repeatPotential": 61 },
+        { "name": "Reusable Oil Spray Bottle", "category": "Kitchen", "fallbackProductUrls": ["https://www.tiktok.com/search?q=reusable%20oil%20spray%20bottle"], "trendVelocity": 68, "marginPotential": 71, "supplierReliability": 77, "deliveryFit": 82, "repeatPotential": 73 },
+        { "name": "Gym Resistance Bands", "category": "Fitness", "fallbackProductUrls": ["https://www.tiktok.com/search?q=gym%20resistance%20bands"], "trendVelocity": 79, "marginPotential": 76, "supplierReliability": 80, "deliveryFit": 88, "repeatPotential": 75 },
+        { "name": "Mini Label Printer", "category": "Office", "fallbackProductUrls": ["https://www.tiktok.com/search?q=mini%20label%20printer"], "trendVelocity": 82, "marginPotential": 68, "supplierReliability": 69, "deliveryFit": 84, "repeatPotential": 57 }
+      ]
+    },
+    {
+      "name": "AliExpress Supplier Signals",
+      "type": "apiStub",
+      "enabled": true,
+      "envKey": "ALIEXPRESS_API_KEY",
+      "stubProducts": [
+        { "name": "USB Rechargeable Table Fan", "category": "Home", "fallbackProductUrls": ["https://www.aliexpress.com/wholesale?SearchText=USB%20rechargeable%20table%20fan"], "trendVelocity": 73, "marginPotential": 81, "supplierReliability": 71, "deliveryFit": 78, "repeatPotential": 63 },
+        { "name": "Portable Sealing Machine", "category": "Kitchen", "fallbackProductUrls": ["https://www.aliexpress.com/wholesale?SearchText=portable%20sealing%20machine"], "trendVelocity": 70, "marginPotential": 79, "supplierReliability": 74, "deliveryFit": 80, "repeatPotential": 66 }
       ]
     }
   ]

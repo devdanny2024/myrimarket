@@ -23,7 +23,7 @@ export function TopNav({ categories }: { categories: Category[] }) {
           {categoryLinks.map((c) => (
             <Link
               key={c.id}
-              href={`/?categoryId=${encodeURIComponent(c.id)}`}
+              href={`/categories/${encodeURIComponent(c.slug)}`}
               className="hover:text-slate-900"
             >
               {c.name}

@@ -30,6 +30,108 @@ function clampScore(value) {
   return Math.max(0, Math.min(100, n));
 }
 
+function normalizeUrl(value) {
+  if (!value || typeof value !== 'string') return '';
+  const trimmed = value.trim();
+  if (!trimmed) return '';
+
+  if (/^https?:\/\//i.test(trimmed)) return trimmed;
+  return `https://${trimmed.replace(/^\/+/, '')}`;
+}
+
+function slugifyForSearch(value) {
+  return encodeURIComponent(String(value || '').trim());
+}
+
+function dedupeUrls(urls) {
+  const seen = new Set();
+  return (urls || []).filter((u) => {
+    const url = normalizeUrl(u);
+    if (!url || seen.has(url)) return false;
+    seen.add(url);
+    return true;
+  });
+}
+
+function resolveJumiaLinks(product) {
+  const direct = normalizeUrl(product.productUrl || product.sourceProductUrl || product.jumiaUrl);
+  if (direct) {
+    return {
+      productUrl: direct,
+      fallbackProductUrls: dedupeUrls(product.fallbackProductUrls || product.candidateProductUrls),
+    };
+  }
+
+  const query = slugifyForSearch(product.name);
+  const sourceCandidates = dedupeUrls(product.fallbackProductUrls || product.candidateProductUrls);
+  const generatedCandidates = dedupeUrls([
+    `https://www.jumia.com.ng/catalog/?q=${query}`,
+  ]);
+
+  return {
+    productUrl: sourceCandidates[0] || generatedCandidates[0] || '',
+    fallbackProductUrls: dedupeUrls([...sourceCandidates, ...generatedCandidates]),
+  };
+}
+
+function resolveAliExpressLinks(product) {
+  const direct = normalizeUrl(product.productUrl || product.sourceProductUrl || product.aliExpressUrl);
+  if (direct) {
+    return {
+      productUrl: direct,
+      fallbackProductUrls: dedupeUrls(product.fallbackProductUrls || product.candidateProductUrls),
+    };
+  }
+
+  const query = slugifyForSearch(product.name);
+  const sourceCandidates = dedupeUrls(product.fallbackProductUrls || product.candidateProductUrls);
+  const generatedCandidates = dedupeUrls([
+    `https://www.aliexpress.com/wholesale?SearchText=${query}`,
+  ]);
+
+  return {
+    productUrl: sourceCandidates[0] || generatedCandidates[0] || '',
+    fallbackProductUrls: dedupeUrls([...sourceCandidates, ...generatedCandidates]),
+  };
+}
+
+function resolveTikTokShopLinks(product) {
+  const direct = normalizeUrl(product.productUrl || product.sourceProductUrl || product.tiktokShopUrl);
+  if (direct) {
+    return {
+      productUrl: direct,
+      fallbackProductUrls: dedupeUrls(product.fallbackProductUrls || product.candidateProductUrls),
+    };
+  }
+
+  const query = slugifyForSearch(product.name);
+  const sourceCandidates = dedupeUrls(product.fallbackProductUrls || product.candidateProductUrls);
+  const generatedCandidates = dedupeUrls([
+    `https://www.tiktok.com/search?q=${query}`,
+  ]);
+
+  return {
+    productUrl: sourceCandidates[0] || generatedCandidates[0] || '',
+    fallbackProductUrls: dedupeUrls([...sourceCandidates, ...generatedCandidates]),
+  };
+}
+
+function resolveSourceLinks(product) {
+  const sourceName = String(product.source || '').toLowerCase();
+
+  if (sourceName.includes('jumia')) return resolveJumiaLinks(product);
+  if (sourceName.includes('aliexpress')) return resolveAliExpressLinks(product);
+  if (sourceName.includes('tiktok')) return resolveTikTokShopLinks(product);
+
+  const direct = normalizeUrl(product.productUrl || product.sourceProductUrl);
+  const fallbacks = dedupeUrls(product.fallbackProductUrls || product.candidateProductUrls);
+
+  return {
+    productUrl: direct || fallbacks[0] || '',
+    fallbackProductUrls: fallbacks,
+  };
+}
+
 function scoreProduct(product) {
   const breakdown = {
     trendVelocity: clampScore(product.trendVelocity),
@@ -47,8 +149,12 @@ function scoreProduct(product) {
       breakdown.repeatPotential * WEIGHTS.repeatPotential) / 100
   ).toFixed(2));
 
+  const links = resolveSourceLinks(product);
+
   return {
     ...product,
+    productUrl: links.productUrl,
+    fallbackProductUrls: links.fallbackProductUrls,
     scoreBreakdown: breakdown,
     weightedScore,
   };
@@ -147,7 +253,11 @@ function buildMarkdown(report) {
 
   const lines = report.topProducts.map((p) => {
     const b = p.scoreBreakdown;
-    return `\n### #${p.rank} ${p.name} — ${p.weightedScore}/100\n- Category: ${p.category || 'N/A'}\n- Source: ${p.source} (${p.sourceStatus})\n- Trend Velocity: ${b.trendVelocity}\n- Margin Potential: ${b.marginPotential}\n- Supplier Reliability: ${b.supplierReliability}\n- Delivery Fit: ${b.deliveryFit}\n- Repeat Potential: ${b.repeatPotential}`;
+    const fallbackLine = (p.fallbackProductUrls || []).length
+      ? `\n- Fallback Source Links: ${(p.fallbackProductUrls || []).join(' | ')}`
+      : '';
+
+    return `\n### #${p.rank} ${p.name} — ${p.weightedScore}/100\n- Category: ${p.category || 'N/A'}\n- Source: ${p.source} (${p.sourceStatus})\n- Product Link: ${p.productUrl || 'N/A'}${fallbackLine}\n- Trend Velocity: ${b.trendVelocity}\n- Margin Potential: ${b.marginPotential}\n- Supplier Reliability: ${b.supplierReliability}\n- Delivery Fit: ${b.deliveryFit}\n- Repeat Potential: ${b.repeatPotential}`;
   });
 
   return `${header}\n${lines.join('\n')}`;
@@ -156,7 +266,11 @@ function buildMarkdown(report) {
 function buildTelegramSummary(report) {
   const top5 = report.topProducts.slice(0, 5);
   const body = top5
-    .map((p) => `${p.rank}) ${p.name} — ${p.weightedScore}/100`)
+    .map((p) => {
+      const fallback = (p.fallbackProductUrls || [])[0];
+      const link = p.productUrl || fallback || 'N/A';
+      return `${p.rank}) ${p.name} — ${p.weightedScore}/100\n   Product: ${link}`;
+    })
     .join('\n');
 
   return `Myri Product Radar (NG) - ${report.runDate}\nTop 5 opportunities today:\n${body}\n\nTotal candidates: ${report.uniqueCandidates} | Signals: ${report.signalsIngested}`;

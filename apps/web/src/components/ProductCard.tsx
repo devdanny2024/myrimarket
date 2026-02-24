@@ -31,7 +31,7 @@ export function ProductCard({
     >
       <div className="relative aspect-[4/3] bg-slate-50">
         <Image
-          src={product.image || "/myri-logo.svg"}
+          src={product.image || `/products/${product.id}.svg`}
           alt={product.title}
           fill
           className="object-contain p-6"

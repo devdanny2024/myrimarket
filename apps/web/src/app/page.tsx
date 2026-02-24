@@ -6,7 +6,7 @@ import { Hero } from "@/components/Hero";
 import { ProductCard } from "@/components/ProductCard";
 import { TopNav } from "@/components/TopNav";
 
-export const dynamic = "force-static";
+export const dynamic = "force-dynamic";
 
 function getCurrencyFromSearchParams(searchParams?: {
   currency?: string;
@@ -17,11 +17,11 @@ function getCurrencyFromSearchParams(searchParams?: {
 export default async function Home({
   searchParams,
 }: {
-  searchParams?: Promise<{ categoryId?: string; currency?: string }>;
+  searchParams?: Promise<{ currency?: string }>;
 }) {
   const sp = searchParams ? await searchParams : undefined;
   const categories = await fetchCategories();
-  const products = await fetchProducts({ categoryId: sp?.categoryId });
+  const products = await fetchProducts();
   const currency = getCurrencyFromSearchParams(sp);
 
   const newArrivals: Product[] = products.slice(0, 8);

@@ -2,7 +2,7 @@
   "report": "Myri Product Radar V1",
   "country": "NG",
   "runDate": "2026-02-23",
-  "runTimestamp": "2026-02-23T13:55:59.483Z",
+  "runTimestamp": "2026-02-23T14:05:38.646Z",
   "weights": {
     "trendVelocity": 30,
     "marginPotential": 25,
@@ -28,6 +28,7 @@
       "notes": [
         "Source TikTok Shop Signals NG is stubbed. Configure TIKTOK_SHOP_API_KEY to enable live ingestion."
       ],
+      "productUrl": "https://www.google.com/search?q=Gym%20Resistance%20Bands%20Nigeria",
       "scoreBreakdown": {
         "trendVelocity": 79,
         "marginPotential": 76,
@@ -50,6 +51,7 @@
       "sourceType": "mock",
       "sourceStatus": "live-mock",
       "country": "NG",
+      "productUrl": "https://www.google.com/search?q=Hair%20Bonnet%20Silk%20Nigeria",
       "scoreBreakdown": {
         "trendVelocity": 72,
         "marginPotential": 80,
@@ -72,6 +74,7 @@
       "sourceType": "mock",
       "sourceStatus": "live-mock",
       "country": "NG",
+      "productUrl": "https://www.google.com/search?q=Beard%20Growth%20Oil%20Nigeria",
       "scoreBreakdown": {
         "trendVelocity": 76,
         "marginPotential": 82,
@@ -94,6 +97,7 @@
       "sourceType": "mock",
       "sourceStatus": "live-mock",
       "country": "NG",
+      "productUrl": "https://www.google.com/search?q=Waist%20Trainer%20Nigeria",
       "scoreBreakdown": {
         "trendVelocity": 81,
         "marginPotential": 79,
@@ -116,6 +120,7 @@
       "sourceType": "mock",
       "sourceStatus": "live-mock",
       "country": "NG",
+      "productUrl": "https://www.google.com/search?q=LED%20Ring%20Light%20Nigeria",
       "scoreBreakdown": {
         "trendVelocity": 84,
         "marginPotential": 69,
@@ -138,6 +143,7 @@
       "sourceType": "mock",
       "sourceStatus": "live-mock",
       "country": "NG",
+      "productUrl": "https://www.google.com/search?q=Car%20Phone%20Holder%20Nigeria",
       "scoreBreakdown": {
         "trendVelocity": 71,
         "marginPotential": 75,
@@ -160,6 +166,7 @@
       "sourceType": "mock",
       "sourceStatus": "live-mock",
       "country": "NG",
+      "productUrl": "https://www.google.com/search?q=Solar%20Power%20Bank%20Nigeria",
       "scoreBreakdown": {
         "trendVelocity": 90,
         "marginPotential": 70,
@@ -182,6 +189,7 @@
       "sourceType": "mock",
       "sourceStatus": "live-mock",
       "country": "NG",
+      "productUrl": "https://www.google.com/search?q=Wireless%20Earbuds%20Nigeria",
       "scoreBreakdown": {
         "trendVelocity": 85,
         "marginPotential": 73,
@@ -207,6 +215,7 @@
       "notes": [
         "Source TikTok Shop Signals NG is stubbed. Configure TIKTOK_SHOP_API_KEY to enable live ingestion."
       ],
+      "productUrl": "https://www.google.com/search?q=Ice%20Facial%20Roller%20Nigeria",
       "scoreBreakdown": {
         "trendVelocity": 83,
         "marginPotential": 78,
@@ -229,6 +238,7 @@
       "sourceType": "mock",
       "sourceStatus": "live-mock",
       "country": "NG",
+      "productUrl": "https://www.google.com/search?q=Ankara%20Tote%20Bag%20Nigeria",
       "scoreBreakdown": {
         "trendVelocity": 69,
         "marginPotential": 77,

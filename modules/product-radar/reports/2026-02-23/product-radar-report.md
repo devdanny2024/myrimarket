@@ -1,7 +1,7 @@
 # Myri Product Radar V1 (NG)
 
 - Run Date: 2026-02-23
-- Run Timestamp: 2026-02-23T13:55:59.483Z
+- Run Timestamp: 2026-02-23T14:05:38.646Z
 - Signals Ingested: 15
 - Unique Candidates: 15
 
@@ -19,6 +19,7 @@
 ### #1 Gym Resistance Bands — 79.4/100
 - Category: Fitness
 - Source: TikTok Shop Signals NG (stubbed-awaiting-api-key)
+- Product Link: https://www.google.com/search?q=Gym%20Resistance%20Bands%20Nigeria
 - Trend Velocity: 79
 - Margin Potential: 76
 - Supplier Reliability: 80
@@ -28,6 +29,7 @@
 ### #2 Hair Bonnet Silk — 79.15/100
 - Category: Beauty
 - Source: Jumia NG Popular Searches (live-mock)
+- Product Link: https://www.google.com/search?q=Hair%20Bonnet%20Silk%20Nigeria
 - Trend Velocity: 72
 - Margin Potential: 80
 - Supplier Reliability: 76
@@ -37,6 +39,7 @@
 ### #3 Beard Growth Oil — 78.1/100
 - Category: Personal Care
 - Source: Google Trends Nigeria (live-mock)
+- Product Link: https://www.google.com/search?q=Beard%20Growth%20Oil%20Nigeria
 - Trend Velocity: 76
 - Margin Potential: 82
 - Supplier Reliability: 67
@@ -46,6 +49,7 @@
 ### #4 Waist Trainer — 78/100
 - Category: Fashion
 - Source: Google Trends Nigeria (live-mock)
+- Product Link: https://www.google.com/search?q=Waist%20Trainer%20Nigeria
 - Trend Velocity: 81
 - Margin Potential: 79
 - Supplier Reliability: 73
@@ -55,6 +59,7 @@
 ### #5 LED Ring Light — 77.75/100
 - Category: Creator Gear
 - Source: Google Trends Nigeria (live-mock)
+- Product Link: https://www.google.com/search?q=LED%20Ring%20Light%20Nigeria
 - Trend Velocity: 84
 - Margin Potential: 69
 - Supplier Reliability: 75
@@ -64,6 +69,7 @@
 ### #6 Car Phone Holder — 77.35/100
 - Category: Auto
 - Source: Jumia NG Popular Searches (live-mock)
+- Product Link: https://www.google.com/search?q=Car%20Phone%20Holder%20Nigeria
 - Trend Velocity: 71
 - Margin Potential: 75
 - Supplier Reliability: 83
@@ -73,6 +79,7 @@
 ### #7 Solar Power Bank — 77.1/100
 - Category: Electronics
 - Source: Google Trends Nigeria (live-mock)
+- Product Link: https://www.google.com/search?q=Solar%20Power%20Bank%20Nigeria
 - Trend Velocity: 90
 - Margin Potential: 70
 - Supplier Reliability: 72
@@ -82,6 +89,7 @@
 ### #8 Wireless Earbuds — 77.05/100
 - Category: Electronics
 - Source: Jumia NG Popular Searches (live-mock)
+- Product Link: https://www.google.com/search?q=Wireless%20Earbuds%20Nigeria
 - Trend Velocity: 85
 - Margin Potential: 73
 - Supplier Reliability: 70
@@ -91,6 +99,7 @@
 ### #9 Ice Facial Roller — 76.55/100
 - Category: Beauty
 - Source: TikTok Shop Signals NG (stubbed-awaiting-api-key)
+- Product Link: https://www.google.com/search?q=Ice%20Facial%20Roller%20Nigeria
 - Trend Velocity: 83
 - Margin Potential: 78
 - Supplier Reliability: 65
@@ -100,6 +109,7 @@
 ### #10 Ankara Tote Bag — 75.8/100
 - Category: Fashion
 - Source: Jumia NG Popular Searches (live-mock)
+- Product Link: https://www.google.com/search?q=Ankara%20Tote%20Bag%20Nigeria
 - Trend Velocity: 69
 - Margin Potential: 77
 - Supplier Reliability: 79
