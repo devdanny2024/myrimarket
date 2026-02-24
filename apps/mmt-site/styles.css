@@ -1,0 +1,258 @@
+:root {
+  --bg: #07090f;
+  --surface: #0f1320;
+  --surface-2: #12192b;
+  --text: #e8edff;
+  --muted: #9aa7c7;
+  --accent: #6b8cff;
+  --accent-2: #4ee2c6;
+  --border: rgba(255, 255, 255, 0.08);
+  --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  color: var(--text);
+  background: radial-gradient(circle at top right, #121d37 0%, var(--bg) 45%), var(--bg);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  width: min(1100px, 92vw);
+  margin: 0 auto;
+}
+
+.section {
+  padding: 4.5rem 0;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(8px);
+  background: rgba(7, 9, 15, 0.72);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 72px;
+}
+
+.brand {
+  display: flex;
+  align-items: baseline;
+  gap: 0.55rem;
+}
+
+.brand-mark {
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--accent-2);
+}
+
+.brand-text {
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 1.25rem;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  color: #d8e0ff;
+  font-weight: 500;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 0.85fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent-2);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+h1 {
+  margin: 0.6rem 0 0.3rem;
+  font-size: clamp(2rem, 4vw, 3.1rem);
+  line-height: 1.1;
+}
+
+h2 {
+  margin: 0.35rem 0 1rem;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  line-height: 1.2;
+}
+
+h3 {
+  margin-top: 0;
+}
+
+.tagline {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0.8rem 0;
+  color: #f0f4ff;
+}
+
+.lead,
+p,
+li {
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.hero-cta {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 1.2rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 0.72rem 1.2rem;
+  font-weight: 600;
+  border: 1px solid transparent;
+}
+
+.btn-primary {
+  background: linear-gradient(130deg, var(--accent), #8ba5ff);
+  color: #020617;
+}
+
+.btn-secondary {
+  border-color: var(--border);
+  color: #e0e8ff;
+  background: rgba(255, 255, 255, 0.01);
+}
+
+.hero-card,
+.section-card,
+.service-card,
+.contact-form {
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: linear-gradient(180deg, var(--surface) 0%, var(--surface-2) 100%);
+  padding: 1.4rem;
+  box-shadow: var(--shadow);
+}
+
+.hero-card ul,
+.service-card ul {
+  padding-left: 1.1rem;
+}
+
+.service-card {
+  margin-top: 1rem;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+  align-items: start;
+}
+
+.contact-form {
+  display: grid;
+  gap: 0.8rem;
+}
+
+label {
+  display: grid;
+  gap: 0.4rem;
+  color: #d9e2ff;
+  font-size: 0.95rem;
+}
+
+input,
+textarea {
+  border: 1px solid var(--border);
+  background: #0b1120;
+  color: var(--text);
+  border-radius: 10px;
+  padding: 0.7rem 0.8rem;
+  font: inherit;
+}
+
+.form-message {
+  margin: 0.2rem 0 0;
+  font-size: 0.92rem;
+  color: var(--accent-2);
+}
+
+.site-footer {
+  border-top: 1px solid var(--border);
+  padding: 1.1rem 0 2rem;
+}
+
+.footer-wrap {
+  color: #93a0c0;
+  font-size: 0.92rem;
+}
+
+.bg-glow {
+  position: fixed;
+  inset: auto;
+  border-radius: 999px;
+  filter: blur(80px);
+  z-index: -1;
+  opacity: 0.35;
+}
+
+.bg-glow-1 {
+  width: 360px;
+  height: 360px;
+  background: #3557ff;
+  right: -80px;
+  top: -90px;
+}
+
+.bg-glow-2 {
+  width: 320px;
+  height: 320px;
+  background: #1ed8bc;
+  left: -120px;
+  bottom: 8vh;
+}
+
+@media (max-width: 860px) {
+  .hero-grid,
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .brand-text {
+    display: none;
+  }
+}
